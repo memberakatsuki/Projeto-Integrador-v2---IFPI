@@ -1,28 +1,20 @@
 const express = require('express')
 const routes = express.Router()
-const { findByUserSettings, create, update } = require("./controllers/SettingsController")
-const { showByUser } = require("./controllers/MessagesController")
+const SettingsController = require("./controllers/SettingsController")
+const MessagesController = require("./controllers/MessagesController")
+const UsersController = require("./controllers/UsersController")
 
-routes.post('/settings', create)
-routes.get('/settings/:username', findByUserSettings)
-routes.put('/settings/:username', update)
-routes.get("/messages/:id", showByUser)
-
-/*
-const SettingsController = require("./services/SettingsController")
-const UsersControllers = require("./services/UsersControllers")
-const MessagesController = require("./services/MessagesController")
-
-const settingsController = new SettingsController()
-const usersControllers = new UsersControllers()
-const messagesController = new MessagesController()
-
-const routes = express.Router()
+const settingsController = new SettingsController
+const messagesController = new MessagesController
+const usersController = new UsersController
 
 routes.post('/settings', settingsController.create)
-routes.post('/users', usersControllers.create)
+routes.post('/users', usersController.create)
 routes.post('/messages', messagesController.create)
 
-routes.get("/messages/:id", messagesController.showByUser)*/
+routes.get('/settings/:username', settingsController.findByUserSettings)
+routes.get("/messages/:id", messagesController.showByUser)
+routes.put('/settings/:username', settingsController.update)
+
 
 module.exports = routes

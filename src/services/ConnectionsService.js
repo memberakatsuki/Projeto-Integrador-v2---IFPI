@@ -1,7 +1,6 @@
 const connection = require("../models/Connection")
 
-
-module.exports = {
+class ConnectionsService {
   async createConnection({socket_id, user_id,admin_id,id}){
     const create_connections = await connection.create({
       id,
@@ -10,7 +9,7 @@ module.exports = {
       socket_id
     })
     return create_connections
-  },
+  }
 
   async findByUserId(user_id){
     const connections = await connection.findOne({
@@ -19,7 +18,7 @@ module.exports = {
       }
     })
     return connections
-  },
+  }
 
   async findAllWithoutAdmin(){
     const connections = await connection.findAll({
@@ -32,7 +31,7 @@ module.exports = {
     })
 
     return connections
-  },
+  }
   
   async findBySocketID(socket_id){
     const connections = await connection.findOne({
@@ -41,7 +40,7 @@ module.exports = {
       }
     })
     return connections
-  },
+  }
 
   async updateAdminID({user_id, admin_id}){
     await connection.update(
@@ -54,7 +53,7 @@ module.exports = {
         }
       }
     )
-  },
+  }
 
   async deleteBySocketId(socket_id){
     await connection.destroy({
@@ -64,3 +63,5 @@ module.exports = {
     })
   }
 }
+
+module.exports = ConnectionsService

@@ -1,26 +1,27 @@
 const  { io }  = require("../http");
-const { createUsers, findByEmail } = require("../services/UsersService");
-const {
-  createConnection,
-  findByUserId,
-  findBySocketID,
-  findAllWithoutAdmin,
-  deleteBySocketId
-} = require("../services/ConnectionsService");
-const { createMessages, ListByUser,deleteMessages } = require("../services/MessagesService");
+const UsersService = require("../services/UsersService")
+const ConnectionsService = require("../services/ConnectionsService")
+const MessagesService = require("../services/MessagesService")
+
+const { createMessages, ListByUser,deleteMessages } = require("../services/MessagesService")
 
 io.on("connect", (socket) => {
+
+  const connectionsService = new ConnectionsService
+  const usersService = new UsersService
+  const messagesService = new MessagesService
+
   let userId = null;
   socket.on("client_first_access", async (params) => {
     const socket_id = socket.id;
     const { text, email } = params;
     let user_id = null;
-    const userExists = await findByEmail(email);
+    const userExists = await usersService.findByEmail(email);
 
     if (!userExists) {
-      const user = await createUsers(email);
+      const user = await usersService.createUsers(email);
 
-      await createConnection({
+      await connectionsService.createConnection({
         user_id: user.id,
         socket_id,
       });
@@ -29,10 +30,10 @@ io.on("connect", (socket) => {
     } else {
       user_id = userExists.id;
       userId = userExists.id
-      const connection = await findByUserId(userExists.id);
+      const connection = await connectionsService.findByUserId(userExists.id);
 
       if (!connection) {
-        await createConnection({
+        await connectionsService.createConnection({
           user_id: userExists.id,
           socket_id,
         });
@@ -47,16 +48,16 @@ io.on("connect", (socket) => {
           });
       }
     }
-    await createMessages({
+    await messagesService.createMessages({
       text,
       user_id,
     });
 
-    const allMessages = await ListByUser(user_id);
+    const allMessages = await messagesService.ListByUser(user_id);
 
     socket.emit("client_list_all_messages", allMessages);
 
-    const allUsers = await findAllWithoutAdmin();
+    const allUsers = await connectionsService.findAllWithoutAdmin();
 
     io.emit("admin_list_all_users", allUsers);
   });
@@ -65,8 +66,8 @@ io.on("connect", (socket) => {
     const { text, socket_admin_id } = params;
     const socket_id = socket.id;
 
-    const { user_id } = await findBySocketID(socket_id);
-    const message = await createMessages({
+    const { user_id } = await connectionsService.findBySocketID(socket_id);
+    const message = await messagesService.createMessages({
       text,
       user_id,
     });
@@ -78,7 +79,7 @@ io.on("connect", (socket) => {
   });
 
   socket.on("disconnect", async () => {
-    await deleteBySocketId(socket.id)
-    await deleteMessages(userId);
+    await connectionsService.deleteBySocketId(socket.id)
+    await messagesService.deleteMessages(userId);
   });
 });
