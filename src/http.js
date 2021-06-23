@@ -4,8 +4,8 @@ const routes = require("./routes")
 const { createServer } = require("http")
 const { Server } = require("socket.io")
 const cors = require("cors")
-require("dotenv").config()
 
+require("dotenv").config()
 require("./database/sequelize")
 
 const app = express()
@@ -18,17 +18,15 @@ app.set("views", path.join(__dirname, "..", "public"))
 app.engine("html", require("ejs").renderFile)
 app.set("view engine", "html")
 
-app.get("/client", async (req,res) =>{
-  return await res.render("html/client.html")
+app.get("/client",  (req,res) =>{
+  return  res.render("html/client.html")
 })
 
-app.get("/admin", async (req,res) =>{
-  return await res.render("html/admin.html")
+app.get("/admin", (req,res) =>{
+  return  res.render("html/admin.html")
 })
 
-io.on("connection" , (socket) =>{
-  //console.log("se conectou", socket.id)
-})
+io.on("connection" , (socket) =>{})
 
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
