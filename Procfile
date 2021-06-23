@@ -1,1 +1,1 @@
-web: yarn db:makemigrations
+web: yarn sequelize db:migrate
