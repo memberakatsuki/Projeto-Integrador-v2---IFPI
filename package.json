@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start" : "node src/server.js"
+    "start" : "node src/server.js",
+    "build": "node sequelize db:migrate"
   },
   "dependencies": {
     "cors": "^2.8.5",
