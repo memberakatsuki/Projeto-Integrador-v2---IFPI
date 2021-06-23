@@ -1,2 +1,2 @@
 web: yarn start
-web: yan biuld
+web: yarn biuld
