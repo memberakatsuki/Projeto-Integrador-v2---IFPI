@@ -27,12 +27,12 @@ app.set("views", path.join(__dirname, "..", "public"))
 app.engine("html", require("ejs").renderFile)
 app.set("view engine", "html")
 
-app.get("/client", (req,res) =>{
-  return res.render("html/client.html")
+app.get("/client", async (req,res) =>{
+  return await res.render("html/client.html")
 })
 
-app.get("/admin", (req,res) =>{
-  return res.render("html/admin.html")
+app.get("/admin", async (req,res) =>{
+  return await res.render("html/admin.html")
 })
 
 app.get('/db', async (req, res) => {
@@ -48,9 +48,7 @@ app.get('/db', async (req, res) => {
   }
 })
 
-/* app.get("/pages/register", (req,res) =>{
-  return res.render("html/register.html")
-}) */
+
 
 io.on("connection" , (socket) =>{
   //console.log("se conectou", socket.id)
