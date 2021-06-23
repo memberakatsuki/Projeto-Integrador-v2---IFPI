@@ -1,19 +1,30 @@
-module.exports = {
-  "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "production": {
-    "use_env_variable": "DATABASE_URL"
+const { Sequelize } = require("sequelize")
+
+const sequelize = new Sequelize( process.env.DATABASE_URL, {
+  dialectOptions:{
+    ssl:{
+      rejectUnauthorized: false
+    }
   }
-}
+})
+
+sequelize
+  .authenticate()
+  .then(() => console.log("Connection has been established successfully."))
+  .catch((err) => console.log("Unable to connect to the database:", err))
+
+module.exports = sequelize
+
+
+
+/* module.exports = {
+  dialect: 'postgres',
+  host: 'localhost',
+  username: 'postgres',
+  password: 'sdev18010',
+  database: 'sequelize',
+  define: {
+    timestamps: true,
+    underscored: true
+  },
+} */
