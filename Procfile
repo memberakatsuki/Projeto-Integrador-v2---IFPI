@@ -1,1 +1,1 @@
-web: yarn start yarn biuld
+web: yarn start, yarn biuld
