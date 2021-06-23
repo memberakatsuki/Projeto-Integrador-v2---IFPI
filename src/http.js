@@ -6,15 +6,6 @@ const { Server } = require("socket.io")
 const cors = require("cors")
 require("dotenv").config()
 
-const { Pool } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
-
-
 require("./database")
 
 const app = express()
@@ -34,21 +25,6 @@ app.get("/client", async (req,res) =>{
 app.get("/admin", async (req,res) =>{
   return await res.render("html/admin.html")
 })
-
-app.get('/db', async (req, res) => {
-  try {
-    const client = await pool.connect();
-    const result = await client.query('SELECT * FROM test_table');
-    const results = { 'results': (result) ? result.rows : null};
-    res.render('pages/db', results );
-    client.release();
-  } catch (err) {
-    console.error(err);
-    res.send("Error " + err);
-  }
-})
-
-
 
 io.on("connection" , (socket) =>{
   //console.log("se conectou", socket.id)
