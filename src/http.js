@@ -4,6 +4,8 @@ const routes = require("./routes")
 const { createServer } = require("http")
 const { Server } = require("socket.io")
 const cors = require("cors")
+require("dotenv").config()
+
 require("./database")
 
 const app = express()
