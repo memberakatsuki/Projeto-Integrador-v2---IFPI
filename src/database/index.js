@@ -5,17 +5,7 @@ const User = require("../models/User")
 const Message = require("../models/Message")
 const Connection = require("../models/Connection")
 
-const connection = new Sequelize({
-  dialect: "postgres",
-  username: "ytubbkfa",
-  password: "xFmH6Wlkzv3OEJobdzsrosJN7EARRejt",
-  host: "batyr.db.elephantsql.com",
-  dialectOptions:{
-    ssl:{
-      rejectUnauthorized: true
-    }
-  }
-})
+const connection = new Sequelize(config)
 
 connection
   .authenticate()
