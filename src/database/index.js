@@ -5,7 +5,13 @@ const User = require("../models/User")
 const Message = require("../models/Message")
 const Connection = require("../models/Connection")
 
-const connection = new Sequelize(config)
+const connection = new Sequelize(process.env.DATABASE_URL, {
+  dialectOptions:{
+    ssl:{
+      rejectUnauthorized: true
+    }
+  }
+})
 
 connection
   .authenticate()
