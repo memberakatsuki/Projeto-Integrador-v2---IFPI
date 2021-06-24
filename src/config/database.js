@@ -1,12 +1,12 @@
 module.exports = {
-  dialect: process.env.DB_DIALECT,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
+  dialect: "postgres",
+  username: "soloojtexheynu",
+  password: "41388960e27eaed93d8cbb9d738ae5885039a0e9bf796b817c03456d23451254",
+  host: "ec2-52-86-25-51.compute-1.amazonaws.com",
+  database: "d9v5k43u05fmec",
   dialectOptions:{
     ssl:{
-      rejectUnauthorized:false
+      rejectUnauthorized: false
     }
   },
   define:{
