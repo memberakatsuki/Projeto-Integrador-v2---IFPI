@@ -5,7 +5,11 @@ const User = require("../models/User")
 const Message = require("../models/Message")
 const Connection = require("../models/Connection")
 
-const connection = new Sequelize(process.env.DATABASE_URL, {
+const connection = new Sequelize({
+  dialect: "postgres",
+  username: "ytubbkfa",
+  password: "xFmH6Wlkzv3OEJobdzsrosJN7EARRejt"
+  host: "batyr.db.elephantsql.com (batyr-01)"
   dialectOptions:{
     ssl:{
       rejectUnauthorized: true
