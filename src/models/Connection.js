@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize")
 const { v4: uuidv4 } = require('uuid');
 
-class Connections extends Model{
+class Connection extends Model{
   static init(sequelize){
     super.init({
       id:{
@@ -27,8 +27,8 @@ class Connections extends Model{
   }
 
   static associate(models){
-    this.belongsTo(models.Users, { foreignKey: "user_id", as: "users_connections"})
+    this.belongsTo(models.User, { foreignKey: "user_id", as: "users_connections"})
   }
 }
 
-module.exports = Connections
+module.exports = Connection

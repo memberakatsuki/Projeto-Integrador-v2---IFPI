@@ -1,18 +1,4 @@
-'use strict'
-
-const { Sequelize } = require("sequelize")
-
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialectOptions:{
-    ssl: {
-      rejectUnauthorized: false
-    }
-  }
-})
-
-module.exports = sequelize
-
-/* module.exports = {
+module.exports = {
   dialect: 'postgres',
   host: 'localhost',
   username: 'postgres',
@@ -21,5 +7,5 @@ module.exports = sequelize
   define: {
     timestamps: true,
     underscored: true
-  },
-} */
+  }
+}

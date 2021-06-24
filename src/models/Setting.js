@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize")
 const { v4: uuidv4 } = require('uuid');
 
-class Settings extends Model{
+class Setting extends Model{
   static init(sequelize){
     super.init({
       id:{
@@ -18,4 +18,4 @@ class Settings extends Model{
   }
 }
 
-module.exports = Settings
+module.exports = Setting

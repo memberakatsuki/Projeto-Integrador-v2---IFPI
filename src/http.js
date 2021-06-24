@@ -6,7 +6,7 @@ const { Server } = require("socket.io")
 const cors = require("cors")
 
 require("dotenv").config()
-require("./database/sequelize")
+require("./database")
 
 const app = express()
 
