@@ -1,19 +1,19 @@
 //const { Sequelize } = require("sequelize")
 const sequelize   = require("../config/database")
-const Settings = require("../models/Setting")
-const Users = require("../models/User")
-const Messages = require("../models/Message")
-const Connections = require("../models/Connection")
+const Setting = require("../models/Setting")
+const User = require("../models/User")
+const Message = require("../models/Message")
+const Connection = require("../models/Connection")
 
 
-Settings.init(sequelize)
-Users.init(sequelize)
-Messages.init(sequelize)
-Connections.init(sequelize)
+Setting.init(sequelize)
+User.init(sequelize)
+Message.init(sequelize)
+Connection.init(sequelize)
 
 
-Messages.associate(sequelize.models)
-Users.associate(sequelize.models)
-Connections.associate(sequelize.models)
+Message.associate(sequelize.models)
+User.associate(sequelize.models)
+Connection.associate(sequelize.models)
 
 module.exports = sequelize

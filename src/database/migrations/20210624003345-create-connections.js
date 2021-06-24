@@ -15,7 +15,7 @@ module.exports = {
       user_id:{
         type: Sequelize.UUID,
         allowNull: false,
-        references: { model: 'users', key: 'id'},
+        references: { model: 'Users', key: 'id'},
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
@@ -36,7 +36,8 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('connections');
+    await queryInterface.dropTable('Connections');
     
   }
 };
+

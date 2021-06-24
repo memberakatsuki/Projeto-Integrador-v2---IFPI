@@ -2,20 +2,26 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Settings', { 
+    await queryInterface.createTable('Messages', { 
       id: {
         type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true
       },
-      username:{
+      admin_id:{
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      user_id:{
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: { model: 'Users', key: 'id'},
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      text:{
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      chat:{
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
-        allowNull: false
       },
       created_at:{
         type: Sequelize.DATE,
@@ -26,10 +32,11 @@ module.exports = {
         allowNull: false
       }
     });
-
+     
   },
 
   down: async (queryInterface, Sequelize) => {
-     await queryInterface.dropTable('settings');
+    await queryInterface.dropTable('Messages');
+    
   }
 };
