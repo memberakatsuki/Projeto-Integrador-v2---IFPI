@@ -8,8 +8,8 @@ const Connection = require("../models/Connection")
 const connection = new Sequelize({
   dialect: "postgres",
   username: "ytubbkfa",
-  password: "xFmH6Wlkzv3OEJobdzsrosJN7EARRejt"
-  host: "batyr.db.elephantsql.com (batyr-01)"
+  password: "xFmH6Wlkzv3OEJobdzsrosJN7EARRejt",
+  host: "batyr.db.elephantsql.com",
   dialectOptions:{
     ssl:{
       rejectUnauthorized: true
