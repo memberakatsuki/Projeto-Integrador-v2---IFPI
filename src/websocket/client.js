@@ -3,8 +3,6 @@ const UsersService = require("../services/UsersService")
 const ConnectionsService = require("../services/ConnectionsService")
 const MessagesService = require("../services/MessagesService")
 
-const { createMessages, ListByUser,deleteMessages } = require("../services/MessagesService")
-
 io.on("connect", (socket) => {
 
   const connectionsService = new ConnectionsService
