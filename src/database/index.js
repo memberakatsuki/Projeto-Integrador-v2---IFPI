@@ -5,7 +5,7 @@ const User = require("../models/User")
 const Message = require("../models/Message")
 const Connection = require("../models/Connection")
 
-const connection = db_production
+const connection = new Sequelize(db_production)
 
 connection
   .authenticate()
