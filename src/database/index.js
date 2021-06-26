@@ -1,11 +1,22 @@
 const Sequelize = require("sequelize")
-const { db_developer, db_production }   = require("../config/database")
 const Setting = require("../models/Setting")
 const User = require("../models/User")
 const Message = require("../models/Message")
 const Connection = require("../models/Connection")
 
-const connection = new Sequelize(db_production)
+const connection = new Sequelize( process.env.DATABASE_URL,{
+  dialect: process.env.DB_DIALECT,
+  dialectOptions:{
+    ssl:{
+      require: true,
+      rejectUnauthorized: false
+    }
+  },
+  define:{
+    timestamps: true,
+    underscored: true
+  }
+})
 
 connection
   .authenticate()
